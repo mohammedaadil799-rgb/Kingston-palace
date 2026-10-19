@@ -1,0 +1,475 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   KINGSTON PALACE HOTEL - DESIGN SYSTEM & THEME TOKENS
+   Strict WCAG AA Compliance & Modern Editorial Aesthetics
+   ========================================================================== */
+
+:root {
+  /* Fonts */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* LIGHT MODE SYSTEM (Vibrant & Deep Accents) */
+  --bg-base: #FFFFFF;
+  --bg-surface: #F1F5F9;
+  --bg-surface-elevated: #FFFFFF;
+  --border-color: #E2E8F0;
+  --border-color-subtle: #EDF2F7;
+  
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #64748B;
+  
+  --accent-blue: #2563EB;
+  --accent-purple: #7C3AED;
+  --accent-teal: #0D9488;
+  --accent-yellow: #D97706;
+  --accent-red: #E11D48;
+
+  /* Button & Pill fills in Light Mode */
+  --btn-primary-bg: #2563EB;
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-border: #2563EB;
+  --btn-primary-hover: #1D4ED8;
+
+  --btn-purple-bg: #7C3AED;
+  --btn-purple-text: #FFFFFF;
+  --btn-purple-border: #7C3AED;
+
+  --btn-teal-bg: #0D9488;
+  --btn-teal-text: #FFFFFF;
+  --btn-teal-border: #0D9488;
+
+  --chip-active-bg: rgba(37, 99, 235, 0.12);
+  --chip-active-text: #2563EB;
+  --chip-active-border: rgba(37, 99, 235, 0.35);
+
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(226, 232, 240, 0.85);
+  --shadow-subtle: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+  --shadow-elevated: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="dark"] {
+  /* DARK MODE SYSTEM (Desaturated & Glowing Accents) */
+  --bg-base: #0B0F19;
+  --bg-surface: #1E293B;
+  --bg-surface-elevated: #243248;
+  --border-color: #334155;
+  --border-color-subtle: #243248;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
+
+  --accent-blue: #60A5FA;
+  --accent-purple: #A78BFA;
+  --accent-teal: #2DD4BF;
+  --accent-yellow: #FBBF24;
+  --accent-red: #FB7185;
+
+  /* STRICT RULE 2: In Dark Mode, accent colors are EXCLUSIVELY for text, icons, and borders.
+     For filled buttons or background chips, apply 10%-15% opacity to background fill and use solid color for label text! */
+  --btn-primary-bg: rgba(96, 165, 250, 0.14);
+  --btn-primary-text: #60A5FA;
+  --btn-primary-border: rgba(96, 165, 250, 0.6);
+  --btn-primary-hover: rgba(96, 165, 250, 0.22);
+
+  --btn-purple-bg: rgba(167, 139, 250, 0.14);
+  --btn-purple-text: #A78BFA;
+  --btn-purple-border: rgba(167, 139, 250, 0.6);
+
+  --btn-teal-bg: rgba(45, 212, 191, 0.14);
+  --btn-teal-text: #2DD4BF;
+  --btn-teal-border: rgba(45, 212, 191, 0.6);
+
+  --chip-active-bg: rgba(96, 165, 250, 0.14);
+  --chip-active-text: #60A5FA;
+  --chip-active-border: rgba(96, 165, 250, 0.6);
+
+  --glass-bg: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(51, 65, 85, 0.7);
+  --shadow-subtle: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
+  --shadow-elevated: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px rgba(96, 165, 250, 0.2);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLING
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  min-height: 100vh;
+}
+
+/* Typography Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ==========================================================================
+   CUSTOM CURSOR (Small dot + lagging expanding ring)
+   ========================================================================== */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-blue);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.05s ease;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent-blue);
+  background-color: rgba(96, 165, 250, 0.04);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.custom-cursor-ring.cursor-hover {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(96, 165, 250, 0.12);
+  border-color: var(--accent-blue);
+}
+
+@media (pointer: coarse) {
+  .custom-cursor-dot, .custom-cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   COMMON UTILITIES & STRICT SURFACE SYSTEM
+   ========================================================================== */
+.surface-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.surface-card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+.glass-nav {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Primary Button compliant with Dark Mode Rule */
+.btn-palace-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 1px solid var(--btn-primary-border);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
+}
+
+.btn-palace-primary:hover {
+  transform: translateY(-2px);
+  background-color: var(--btn-primary-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-palace-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-palace-outline:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+/* Animated Chips for Concierge & Filters */
+.palace-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.palace-chip:hover {
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.palace-chip.active {
+  background-color: var(--chip-active-bg);
+  color: var(--chip-active-text);
+  border-color: var(--chip-active-border);
+  box-shadow: var(--shadow-glow);
+  font-weight: 600;
+}
+
+/* Badges */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-blue {
+  background-color: rgba(37, 99, 235, 0.14);
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+}
+
+.badge-purple {
+  background-color: rgba(124, 58, 237, 0.14);
+  color: var(--accent-purple);
+  border: 1px solid var(--accent-purple);
+}
+
+.badge-teal {
+  background-color: rgba(13, 148, 136, 0.14);
+  color: var(--accent-teal);
+  border: 1px solid var(--accent-teal);
+}
+
+.badge-yellow {
+  background-color: rgba(217, 119, 6, 0.14);
+  color: var(--accent-yellow);
+  border: 1px solid var(--accent-yellow);
+}
+
+/* ==========================================================================
+   3D TILT CONTAINER
+   ========================================================================== */
+.tilt-card-wrapper {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.tilt-card-inner {
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-card-inner:hover {
+  box-shadow: var(--shadow-elevated), var(--shadow-glow);
+}
+
+.tilt-depth-element {
+  transform: translateZ(35px);
+  transition: transform 0.25s ease;
+}
+
+/* ==========================================================================
+   INFINITE MARQUEE
+   ========================================================================== */
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 2rem;
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2rem;
+  align-items: stretch;
+  animation: marquee-scroll 38s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   GSAP LETTER REVEAL STYLES
+   ========================================================================== */
+.letter-reveal-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-right: 0.3em;
+}
+
+.letter-reveal-char {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   CUSTOM SCROLLBAR
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* ==========================================================================
+   MODAL BACKDROP & ANIMATION
+   ========================================================================== */
+.palace-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: scale(0.94) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.palace-modal-box {
+  animation: popUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   RESPONSIVE UTILITIES
+   ========================================================================== */
+@media (max-width: 768px) {
+  html {
+    font-size: 14.5px;
+  }
+}
